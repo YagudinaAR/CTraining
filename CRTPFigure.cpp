@@ -3,9 +3,10 @@
 
 using namespace std;
 
+template<class T>
 class IFigure
 {
-protected:
+    protected:
 	double x = 0.0f;
 	double y = 0.0f;
 	double z = 0.0f;
@@ -16,13 +17,16 @@ public:
 		y = j;
 		z = k;
 	}
-	virtual void print() = 0;
+    void print()
+    {
+        static_cast<T*>(this)->print_info();
+    }
 };
 
-class Triangle : public IFigure
+class Triangle : public IFigure<Triangle>
 {
 public:
-	virtual void print()
+     void print_info()
 	{
 		double p = x + y + z;
 		cout << "Type of figure is triangle" << endl;
@@ -32,10 +36,10 @@ public:
 	}
 };
 
-class Rectangle : public IFigure
+class Rectangle : public IFigure<Rectangle>
 {
 public:
-	virtual void print()
+	void print_info()
 	{
 		cout << "Type of figure is rectangle" << endl;
 		cout << "Perimeter: " << 2 * (x + y) << endl;
@@ -43,10 +47,10 @@ public:
 		cout << endl;
 	}
 };
-class Cube : public IFigure
+class Cube : public IFigure<Cube>
 {
 public:
-	virtual void print()
+	void print_info()
 	{
 		cout << "Type of figure is cube" << endl;
 		cout << "Perimeter: " << 4 * x << endl;
@@ -62,8 +66,8 @@ int main()
 	tr.setParameters(3, 3, 5);
 	rc.setParameters(3, 5);
 	cb.setParameters(3);
-	tr.print();
-	cb.print();
-	rc.print();
+	tr.print_info();
+	rc.print_info();
+	cb.print_info();
 	return 0;
 }

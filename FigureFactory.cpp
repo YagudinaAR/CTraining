@@ -8,7 +8,7 @@ class FigureFactory
 {
 	FigureFactory* p;
 public:
-	FigureFactory() : p(0) { }
+	FigureFactory() : p(nullptr) { }
 	FigureFactory(figure_ID id);
 	virtual void print() { p->print(); }
 	virtual ~FigureFactory() { delete p; p = 0; }
