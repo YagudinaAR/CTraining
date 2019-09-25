@@ -66,8 +66,8 @@ int main()
 	tr.setParameters(3, 3, 5);
 	rc.setParameters(3, 5);
 	cb.setParameters(3);
-	tr.print_info();
-	rc.print_info();
-	cb.print_info();
+	tr.print();
+	rc.print();
+	cb.print();
 	return 0;
 }
