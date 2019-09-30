@@ -11,8 +11,8 @@ int getSize(T* first, T* last)
 	int size = 1;
 	while (first != last)
 	{
-		size++;
-		first++;
+		++size;
+		++first;
 	}
 	return size;
 }
@@ -20,14 +20,13 @@ int getSize(T* first, T* last)
 
 bool isPalindrome(string str)
 {
-	str.erase(remove(str.begin(), str.end(), ' '), str.end());
 	int j = str.size() - 1;
 	int i = 0;
 	while ((i < j))
 	{
 		if (str[i] != str[j]) return false;
-		i++;
-		j--;
+		++i;
+		--j;
 	}
 	return true;
 }
@@ -46,25 +45,28 @@ string reverseWords(string str)
 		if (str[j] != ' ')
 		{
 			sub[k] = str[j];
-			k++;
+			++k;
 		}
 		if (str[j] == ' ' || (str[j + 1] == '\0'))
 		{
 			p[size - 1 - i] = new char[k + 1];
 			strncpy(p[size - 1 - i], sub, k);
-			i++;
+			++i;
 			k = 0;
 			sub[0] = { 0 };
 		}
 
-		j++;
+		++j;
 	}
 	string s;
 	for (int i = 0; i < size; i++)
 	{
-		s += *(p + i);
-		s += " ";
-		delete[] p[i];
+		if (*(p + i) != nullptr)
+		{
+			s += *(p + i);
+			s += " ";
+		}
+		else break;
 	}
 	delete[] p;
 	return s;
