@@ -3,7 +3,7 @@
 
 using namespace std;
 
-enum NodeColor {red, black};
+enum NodeColor { red, black };
 
 #define compLT(a,b) (a < b)
 #define compEQ(a,b) (a == b)
@@ -96,7 +96,7 @@ public:
 			else
 			{
 				Node* tmp = node->parent;
-				while (node ==tmp->left)
+				while (node == tmp->left)
 				{
 					node = tmp;
 					tmp = tmp->parent;
@@ -118,7 +118,7 @@ public:
 		}
 
 
-		friend class Tmap<K,V>;
+		friend class Tmap<K, V>;
 	};
 
 private:
@@ -146,16 +146,16 @@ public:
 		cleanup(root);
 	}
 
-	void cleanup(Node* p) 
+	void cleanup(Node* p)
 	{
 		if (!p) return;
-		if (p->left==sentinel)
+		if (p->left == sentinel)
 		{
 			Node* t = p;
 			cleanup(t->left);
 			delete p;
 		}
-		if (p->right==sentinel)
+		if (p->right == sentinel)
 		{
 			cleanup(p->right);
 			delete p;
@@ -199,7 +199,7 @@ public:
 	}
 
 
-/************************************rotate function after insert and remove element*********************************/
+	/************************************rotate function after insert and remove element*********************************/
 	void rotateLeft(Node* x)
 	{
 		Node* y = x->right;
@@ -372,7 +372,7 @@ public:
 		}
 		x->color = black;
 	}
-/*************************************************function for map***************************************************/
+	/*************************************************function for map***************************************************/
 	void insertNode(K _key, V _val)
 	{
 		Node* current = root;
@@ -381,18 +381,18 @@ public:
 		while (current != sentinel)
 		{
 			if (compEQ(_key, current->key))
-			    return;
+				return;
 			parent = current;
 			current = compLT(_key, current->key) ?
 				current->left : current->right;
 		}
 
-			x = new Node(_key, _val);
-				x->parent = parent;
-				x->left = sentinel;
-				x->right = sentinel;
-				x->color = red;
-		if(parent)
+		x = new Node(_key, _val);
+		x->parent = parent;
+		x->left = sentinel;
+		x->right = sentinel;
+		x->color = red;
+		if (parent)
 		{
 			if (compLT(_key, parent->key)) parent->left = x;
 			else parent->right = x;
@@ -452,7 +452,7 @@ public:
 	{
 		printp(root);
 	}
-	void printp(Node *p)
+	void printp(Node* p)
 	{
 		if (p == sentinel)
 			return;
@@ -462,17 +462,17 @@ public:
 	}
 	friend class iterator;
 };
-	int  main() 
-	{
-			Tmap<int, string> mp;
-			mp.insertNode(1, "Hello");
-			mp.insertNode(4, "from");
-			mp.insertNode(110, "russia");
-			mp.insertNode(11, "with");
-			mp.insertNode(3, "love");
-			mp.insertNode(13, "goodbye");
-			auto p = mp.findNode(3, "love");
-			cout << p.first() << p.second() << endl;
-			mp.printNode();
-		return 0;
-	}
+int  main()
+{
+	Tmap<int, string> mp;
+	mp.insertNode(1, "Hello");
+	mp.insertNode(4, "from");
+	mp.insertNode(110, "russia");
+	mp.insertNode(11, "with");
+	mp.insertNode(3, "love");
+	mp.insertNode(13, "goodbye");
+	auto p = mp.findNode(3, "love");
+	cout << p.first() << p.second() << endl;
+	mp.printNode();
+	return 0;
+}
